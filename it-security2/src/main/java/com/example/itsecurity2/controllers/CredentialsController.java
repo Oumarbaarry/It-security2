@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/credentials")
-public class Controller {
+public class CredentialsController {
 
     private final CredentialsRepository repo;
 
@@ -26,9 +26,9 @@ public class Controller {
         return ResponseEntity.ok(repo.findAll());
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<Credentials> getCredentials(@RequestBody CredentialsRequest credentials){
-        Credentials cred = repo.findByUserName(credentials.getUserName());
+        Credentials cred = repo.findByUsername(credentials.getUsername());
         if (cred != null){
             if(passwordEncoder.matches(credentials.getPassword(), cred.getPassword())){
                 return ResponseEntity.ok(cred);
