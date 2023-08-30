@@ -26,6 +26,11 @@ public class CredentialsController {
         return ResponseEntity.ok(repo.findAll());
     }
 
+    @GetMapping("/test")
+    public String test(){
+        return repo.findByUsername("user1").toString();
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Credentials> getCredentials(@RequestBody CredentialsRequest credentials){
         Credentials cred = repo.findByUsername(credentials.getUsername());

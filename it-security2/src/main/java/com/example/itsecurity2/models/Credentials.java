@@ -19,4 +19,13 @@ public class Credentials{
     private Long id;
     private String username;
     private String password;
+
+    @Override
+    public String toString() {
+        return "Credentials{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.itsecurity2;
 
+import com.example.itsecurity2.bruteforce.Bruteforce;
 import com.example.itsecurity2.models.Credentials;
 import com.example.itsecurity2.repositories.CredentialsRepository;
+import com.example.itsecurity2.request.CredentialsRequest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,6 +32,9 @@ public class ItSecurity2Application {
                         .username("user2")
                         .password(passwordEncoder.encode("pass"))
                     .build());
+
+            Bruteforce b = new Bruteforce();
+            b.brutalForce();
         };
     }
 }
