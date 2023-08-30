@@ -49,22 +49,37 @@ public class CredentialsController {
 //        }
 //    }
 
+//    @GetMapping("/login/{username}/{password}")
+//    public ResponseEntity<Credentials> getCredentials(@PathVariable String username,
+//                                                      @PathVariable String password){
+//        Credentials cred = repo.findByUsername(username);
+//        if (cred != null){
+//            if(passwordEncoder.matches(password, cred.getPassword())){
+//                return ResponseEntity.ok(cred);
+//            } else {
+//                return ResponseEntity.ok(Credentials.builder()
+//                            .username("wrong password")
+//                        .build());
+//            }
+//        } else {
+//            return ResponseEntity.ok(Credentials.builder()
+//                        .username("wrong username")
+//                    .build());
+//        }
+//    }
+
     @GetMapping("/login/{username}/{password}")
-    public ResponseEntity<Credentials> getCredentials(@PathVariable String username,
-                                                      @PathVariable String password){
+    public String getCredentials(@PathVariable String username,
+                                 @PathVariable String password){
         Credentials cred = repo.findByUsername(username);
         if (cred != null){
             if(passwordEncoder.matches(password, cred.getPassword())){
-                return ResponseEntity.ok(cred);
+                return "Det gick att logga in";
             } else {
-                return ResponseEntity.ok(Credentials.builder()
-                            .username("wrong password")
-                        .build());
+                return "Fel lösenord";
             }
         } else {
-            return ResponseEntity.ok(Credentials.builder()
-                        .username("wrong username")
-                    .build());
+            return "Fel användarnamn";
         }
     }
 }
