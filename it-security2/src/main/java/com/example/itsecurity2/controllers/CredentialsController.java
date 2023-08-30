@@ -31,11 +31,30 @@ public class CredentialsController {
         return repo.findByUsername("user1").toString();
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Credentials> getCredentials(@RequestBody CredentialsRequest credentials){
-        Credentials cred = repo.findByUsername(credentials.getUsername());
+//    @PostMapping("/login")
+//    public ResponseEntity<Credentials> getCredentials(@RequestBody CredentialsRequest credentials){
+//        Credentials cred = repo.findByUsername(credentials.getUsername());
+//        if (cred != null){
+//            if(passwordEncoder.matches(credentials.getPassword(), cred.getPassword())){
+//                return ResponseEntity.ok(cred);
+//            } else {
+//                return ResponseEntity.ok(Credentials.builder()
+//                            .username("wrong password")
+//                        .build());
+//            }
+//        } else {
+//            return ResponseEntity.ok(Credentials.builder()
+//                        .username("wrong username")
+//                    .build());
+//        }
+//    }
+
+    @GetMapping("/login/{username}/{password}")
+    public ResponseEntity<Credentials> getCredentials(@PathVariable String username,
+                                                      @PathVariable String password){
+        Credentials cred = repo.findByUsername(username);
         if (cred != null){
-            if(passwordEncoder.matches(credentials.getPassword(), cred.getPassword())){
+            if(passwordEncoder.matches(password, cred.getPassword())){
                 return ResponseEntity.ok(cred);
             } else {
                 return ResponseEntity.ok(Credentials.builder()
