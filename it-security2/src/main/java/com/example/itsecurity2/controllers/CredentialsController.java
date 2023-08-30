@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/credentials")
 public class CredentialsController {
 
@@ -31,23 +32,23 @@ public class CredentialsController {
         return repo.findByUsername("user1").toString();
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<Credentials> getCredentials(@RequestBody CredentialsRequest credentials){
-//        Credentials cred = repo.findByUsername(credentials.getUsername());
-//        if (cred != null){
-//            if(passwordEncoder.matches(credentials.getPassword(), cred.getPassword())){
-//                return ResponseEntity.ok(cred);
-//            } else {
-//                return ResponseEntity.ok(Credentials.builder()
-//                            .username("wrong password")
-//                        .build());
-//            }
-//        } else {
-//            return ResponseEntity.ok(Credentials.builder()
-//                        .username("wrong username")
-//                    .build());
-//        }
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<Credentials> getCredential(@RequestBody CredentialsRequest credentials){
+        Credentials cred = repo.findByUsername(credentials.getUsername());
+        if (cred != null){
+            if(passwordEncoder.matches(credentials.getPassword(), cred.getPassword())){
+                return ResponseEntity.ok(cred);
+            } else {
+                return ResponseEntity.ok(Credentials.builder()
+                            .username("wrong password")
+                        .build());
+            }
+        } else {
+            return ResponseEntity.ok(Credentials.builder()
+                        .username("wrong username")
+                    .build());
+        }
+    }
 
 //    @GetMapping("/login/{username}/{password}")
 //    public ResponseEntity<Credentials> getCredentials(@PathVariable String username,
@@ -68,7 +69,7 @@ public class CredentialsController {
 //        }
 //    }
 
-    @GetMapping("/login/{username}/{password}")
+    @PostMapping("/login/{username}/{password}")
     public String getCredentials(@PathVariable String username,
                                  @PathVariable String password){
         Credentials cred = repo.findByUsername(username);
