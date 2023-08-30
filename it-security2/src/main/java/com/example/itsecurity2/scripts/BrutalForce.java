@@ -7,22 +7,20 @@ import java.nio.charset.StandardCharsets;
 
 public class BrutalForce {
 
-    String api = "http://localhost:8080/credentials/login";
-
-    private boolean request(String user, String password){
+    private boolean request(String name, String password){
         try {
-            HttpURLConnection con = (HttpURLConnection) new URL(api).openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            con.setDoOutput(true);
+            HttpURLConnection request = (HttpURLConnection) new URL("http://localhost:8080/credentials/login").openConnection();
+            request.setRequestMethod("POST");
+            request.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            request.setDoOutput(true);
 
-            String formData = "username=" + user + "&password=" + password;
+            String credentials = "username=" + name + "&password=" + password;
 
-            try(OutputStream os = con.getOutputStream()) {
-                byte[] input = formData.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
+            try(OutputStream stream = request.getOutputStream()) {
+                byte[] output = credentials.getBytes(StandardCharsets.UTF_8);
+                stream.write(output, 0, output.length);
             }
-            return con.getResponseCode() == 200;
+            return request.getResponseCode() == 200;
         }catch (Exception e){
             e.printStackTrace();
         }
