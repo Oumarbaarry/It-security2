@@ -33,8 +33,8 @@ public class ItSecurity2Application {
                         .password(passwordEncoder.encode("pass"))
                     .build());
 
-            Bruteforce b = new Bruteforce();
-            b.brutalForce();
+//            Bruteforce b = new Bruteforce();
+//            b.brutalForce();
         };
     }
 }
