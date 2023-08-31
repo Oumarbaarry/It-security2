@@ -20,7 +20,7 @@ public class CredentialsController {
 
     private final CredentialsRepository repo;
 
-    final private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    final private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(1);
 
     @PostMapping("/login")
     public ResponseEntity<Credentials> loginForce(CredentialsRequest credentials){
