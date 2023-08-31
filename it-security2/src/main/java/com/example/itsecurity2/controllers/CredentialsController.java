@@ -19,8 +19,7 @@ import java.util.List;
 public class CredentialsController {
 
     private final CredentialsRepository repo;
-
-    final private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(1);
+    final private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PostMapping("/login")
     public ResponseEntity<Credentials> loginForce(CredentialsRequest credentials){

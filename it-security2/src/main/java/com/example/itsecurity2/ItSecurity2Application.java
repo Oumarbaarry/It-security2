@@ -22,16 +22,13 @@ public class ItSecurity2Application {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             repo.save(Credentials.builder()
                         .username("user1")
-                        .password(passwordEncoder.encode("pass"))
+                        .password(passwordEncoder.encode("aagh"))
                     .build());
 
             repo.save(Credentials.builder()
                         .username("user2")
                         .password(passwordEncoder.encode("pass"))
                     .build());
-
-//            Bruteforce b = new Bruteforce();
-//            b.brutalForce();
         };
     }
 }
